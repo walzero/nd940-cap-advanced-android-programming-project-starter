@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -16,5 +16,9 @@
         <item name="android:padding">@dimen/default_padding</item>
     </style>
 
-    <style name="AppTheme.DefaultBlueButton"></style>
+    <style name="AppTheme.DefaultEditText">
+        <item name="android:textColor">@color/dark_charcoal</item>
+        <item name="android:textColorHint">@color/gray_50</item>
+        <item name="android:maxLength">80</item>
+    </style>
 </resources>

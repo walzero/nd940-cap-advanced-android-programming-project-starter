@@ -4,6 +4,16 @@
 
     <string name="upcoming_elections">Upcoming Elections</string>
     <string name="find_representatives">Find My Representatives</string>
+
     <string name="representative_search">Representative Search</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="city">City</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="use_my_location">Use My Location</string>
+    <string name="my_representatives">My Representatives</string>
+    <string name="go_to_the_information_page">Go to the information page</string>
+    <string name="go_to_the_facebook_profile">Go to the facebook profile</string>
+    <string name="go_to_the_twitter_profile">Go to the Twitter profile</string>
 
 </resources>
