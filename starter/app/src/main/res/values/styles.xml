@@ -10,5 +10,11 @@
     </style>
 
     <!-- TODO: Add necessary styles -->
+    <style name="AppTheme.DefaultTitleText">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/dark_charcoal</item>
+        <item name="android:padding">@dimen/default_padding</item>
+    </style>
 
+    <style name="AppTheme.DefaultBlueButton"></style>
 </resources>

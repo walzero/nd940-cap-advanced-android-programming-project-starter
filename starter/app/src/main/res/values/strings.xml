@@ -4,5 +4,6 @@
 
     <string name="upcoming_elections">Upcoming Elections</string>
     <string name="find_representatives">Find My Representatives</string>
+    <string name="representative_search">Representative Search</string>
 
 </resources>

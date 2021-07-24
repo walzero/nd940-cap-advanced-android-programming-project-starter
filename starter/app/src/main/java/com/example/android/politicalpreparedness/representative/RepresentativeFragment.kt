@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Address
 import java.util.*
 
@@ -18,22 +19,25 @@ class DetailFragment : Fragment() {
         //TODO: Add Constant for Location request
     }
 
+    private lateinit var binding: FragmentRepresentativeBinding
+
     //TODO: Declare ViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         //TODO: Establish bindings
+        binding = FragmentRepresentativeBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
 
         //TODO: Define and assign Representative adapter
 
         //TODO: Populate Representative adapter
 
         //TODO: Establish button listeners for field and location search
-
+        return binding.root
     }
 
     override fun onRequestPermissionsResult(
