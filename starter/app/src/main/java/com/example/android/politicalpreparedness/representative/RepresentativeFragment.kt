@@ -60,6 +60,7 @@ class DetailFragment : Fragment() {
 
     private fun isPermissionGranted(): Boolean {
         //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
+        return false//TODO Remove
     }
 
     private fun getLocation() {
