@@ -1,7 +1,11 @@
 package com.example.android.politicalpreparedness
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
+import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,6 +16,8 @@ class CivicInfoRepository(
     private val civicsApi: CivicsApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
+    private val _representatives = MutableLiveData<List<Representative>>()
+
     suspend fun refreshUpcomingElections() {
         withContext(ioDispatcher) {
             try {
@@ -23,5 +29,18 @@ class CivicInfoRepository(
         }
     }
 
+    suspend fun refreshRepresentatives(address: Address) {
+        try {
+            val response = civicsApi.retrofitService
+                .queryRepresentatives(address.toFormattedString())
+
+            _representatives.postValue(response.toRepresentatives())
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+    }
+
     fun upcomingElections() = electionDatabase.electionDao.getElections()
+
+    fun representatives(): LiveData<List<Representative>> = _representatives
 }

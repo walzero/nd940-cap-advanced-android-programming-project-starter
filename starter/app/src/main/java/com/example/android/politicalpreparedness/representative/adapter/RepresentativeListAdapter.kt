@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.ListItemRepresentativeBinding
 import com.example.android.politicalpreparedness.network.models.Channel
 import com.example.android.politicalpreparedness.representative.model.Representative
@@ -30,16 +31,15 @@ class RepresentativeListAdapter :
 class RepresentativeViewHolder(val binding: ListItemRepresentativeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Representative) {
-        binding.representative = item
+    fun bind(item: Representative) = with(binding) {
+        representative = item
+        imageRepresentative.setImageResource(R.drawable.ic_profile)
 
-        //TODO: Show social links ** Hint: Use provided helper methods
-        //TODO: Show www link ** Hint: Use provided helper methods
+        showSocialLinks(item.official.channels ?: listOf())
+        showWWWLinks(item.official.urls ?: listOf())
 
-        binding.executePendingBindings()
+        executePendingBindings()
     }
-
-    //TODO: Add companion object to inflate ViewHolder (from)
 
     private fun showSocialLinks(channels: List<Channel>) {
         val facebookUrl = getFacebookUrl(channels)
@@ -83,24 +83,23 @@ class RepresentativeViewHolder(val binding: ListItemRepresentativeBinding) :
     companion object {
         fun from(parent: ViewGroup): RepresentativeViewHolder {
             val binding = ListItemRepresentativeBinding
-                .inflate(LayoutInflater.from(parent.context))
+                .inflate(LayoutInflater.from(parent.context), parent, false)
 
             return RepresentativeViewHolder(binding)
         }
     }
 }
 
-//TODO: Create RepresentativeDiffCallback
 class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
     override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+        return oldItem === newItem
+    }
+
+    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
         return oldItem.office.name == newItem.office.name
                 && oldItem.office.division.id == newItem.office.division.id
                 && oldItem.official.name == newItem.official.name
                 && oldItem.official.party == newItem.official.party
-    }
-
-    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-        return oldItem == newItem
     }
 }
 

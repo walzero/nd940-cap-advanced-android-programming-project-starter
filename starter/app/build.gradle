@@ -80,6 +80,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$version_glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
 
+    // Maps
+    implementation "com.google.android.gms:play-services-maps:$version_play_services_maps"
+
     //Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"

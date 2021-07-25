@@ -22,7 +22,7 @@ class App : Application() {
             single { ElectionDatabase.getInstance(get()) }
             single { CivicsApi }
             single { CivicInfoRepository(get(), get()) }
-            factory { RepresentativeViewModel() }
+            factory { RepresentativeViewModel(get()) }
             factory { ElectionsViewModel(get()) }
             factory { VoterInfoViewModel(get()) }
         }

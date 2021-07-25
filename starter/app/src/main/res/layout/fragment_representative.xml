@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Add data binding node -->
+    <data>
+
+        <variable
+            name="representativesAdapter"
+            type="com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter" />
+    </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
@@ -24,7 +29,8 @@
             android:id="@+id/search_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:fontFamily="@font/kanit_bold"
             android:text="@string/representative_search"
             android:theme="@style/AppTheme.DefaultTitleText"
@@ -96,8 +102,6 @@
             app:layout_constraintStart_toEndOf="@id/city"
             app:layout_constraintTop_toTopOf="@id/city" />
 
-        <!-- TODO: Add data binding value -->
-        <!-- TODO: Add visual styling and content -->
         <EditText
             android:id="@+id/zipCode"
             android:layout_width="0dp"
@@ -112,7 +116,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/city" />
 
-        <!-- TODO: Add visual styling and label -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_search"
             android:layout_width="match_parent"
@@ -126,12 +129,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/zipCode" />
 
-        <!-- TODO: Add visual styling and content -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:backgroundTint="@color/colorPrimary"
             android:fontFamily="@font/kanit"
             android:text="@string/use_my_location"
@@ -142,12 +145,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_search" />
 
-        <!-- TODO: Add visual styling and content -->
         <TextView
             android:id="@+id/representative_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
             android:fontFamily="@font/kanit_bold"
             android:text="@string/my_representatives"
             android:theme="@style/AppTheme.DefaultTitleText"
@@ -156,11 +159,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_location" />
 
-        <!-- TODO: Add Representatives RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_representatives"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:orientation="vertical"
+            app:adapter="@{representativesAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,8 +173,6 @@
             app:layout_constraintVertical_bias="0.0"
             tools:itemCount="3"
             tools:listitem="@layout/list_item_representative" />
-        <!-- TODO: Add visual styling and content -->
-        <!-- TODO: ADD List-->
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

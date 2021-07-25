@@ -2,11 +2,15 @@ package com.example.android.politicalpreparedness.network.models.response
 
 import com.example.android.politicalpreparedness.network.models.Office
 import com.example.android.politicalpreparedness.network.models.Official
+import com.example.android.politicalpreparedness.representative.model.Representative
 
 data class RepresentativeResponse(
     val offices: List<Office>,
     val officials: List<Official>
-)
+) {
+    fun toRepresentatives(): List<Representative> =
+        offices.flatMap { office -> office.getRepresentatives(officials) }
+}
 
 enum class RepresentativeLevels(val level: String) {
     Administrative_Area1("administrativeArea1"),
