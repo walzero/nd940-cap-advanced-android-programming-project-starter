@@ -1,10 +1,10 @@
 plugins {
-   id 'com.android.application'
-   id 'kotlin-android'
-   id 'kotlin-android-extensions'
-   id 'kotlin-kapt'
-   id 'kotlinx-serialization'
-   id 'androidx.navigation.safeargs'
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'kotlinx-serialization'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -50,6 +50,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$version_kotlin_serialization"
 
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
+
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
@@ -80,10 +83,18 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$version_room"
     kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.room:room-ktx:$version_room"
 
     //Timber
     implementation "com.jakewharton.timber:timber:$version_timber"
 
+    //Koin
+    implementation "io.insert-koin:koin-android:$version_koin"
+    implementation "io.insert-koin:koin-androidx-workmanager:$version_koin"
+
     // Location
     implementation "com.google.android.gms:play-services-location:$version_play_services_location"
+
+    //Tests
+    testImplementation "io.insert-koin:koin-test-junit4:$version_koin"
 }

@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="representative"
+            type="com.example.android.politicalpreparedness.representative.model.Representative" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +17,7 @@
         android:elevation="@dimen/default_elevation">
 
         <ImageView
-            android:id="@+id/image_avatar"
+            android:id="@+id/image_representative"
             android:layout_width="@dimen/list_item_avatar_size"
             android:layout_height="@dimen/list_item_avatar_size"
             android:layout_margin="@dimen/default_margin"
@@ -37,7 +40,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/image_avatar"
+            app:layout_constraintStart_toEndOf="@id/image_representative"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="President of the United States" />
 
@@ -68,7 +71,7 @@
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/text_name"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/image_avatar"
+            app:layout_constraintStart_toEndOf="@id/image_representative"
             app:layout_constraintStart_toStartOf="@+id/text_name"
             app:layout_constraintTop_toBottomOf="@+id/text_name"
             tools:text="Party of the president" />
