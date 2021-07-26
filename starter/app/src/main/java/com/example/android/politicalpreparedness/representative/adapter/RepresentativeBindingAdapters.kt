@@ -22,6 +22,7 @@ fun fetchImage(view: ImageView, src: String?) {
                     .placeholder(R.drawable.ic_profile)
                     .error(R.drawable.ic_profile)
             }
+            .error(R.drawable.ic_profile)
             .transition(DrawableTransitionOptions.withCrossFade())
             .circleCrop()
             .into(view)

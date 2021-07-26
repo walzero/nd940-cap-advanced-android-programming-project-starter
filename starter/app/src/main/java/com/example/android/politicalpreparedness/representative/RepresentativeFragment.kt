@@ -12,11 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.extension.isAllowed
@@ -64,7 +65,7 @@ class DetailFragment : Fragment() {
     private val gpsRequest =
         registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
             when (result.resultCode) {
-                Activity.RESULT_OK -> viewModel.fetchRepresentativesFromCurrentLocation()
+                Activity.RESULT_OK -> searchWithLastKnownLocation()
                 else -> viewModel.onGpsDisabled()
             }
         }
@@ -89,6 +90,7 @@ class DetailFragment : Fragment() {
     ): View {
         binding = FragmentRepresentativeBinding.inflate(layoutInflater)
         binding.representativesAdapter = adapter
+        binding.addressFields = viewModel
         binding.lifecycleOwner = this
         return binding.root
     }
@@ -113,7 +115,16 @@ class DetailFragment : Fragment() {
 
     private fun setListeners() = with(binding) {
         buttonLocation.setOnClickListener { onSearchRepresentativeByLocation() }
-        binding.recyclerviewRepresentatives.addOnScrollListener(getMotionController())
+        buttonSearch.setOnClickListener { onButtonSearchClicked() }
+        state.onItemSelectedListener = createSpinnerSelectionListener()
+        recyclerviewRepresentatives.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            createMotionController(scrollY - oldScrollY)
+        }
+    }
+
+    private fun onButtonSearchClicked() {
+        viewModel.updateRepresentatives()
+        hideKeyboard()
     }
 
     private fun onSearchRepresentativeByLocation() {
@@ -191,25 +202,37 @@ class DetailFragment : Fragment() {
 
     private fun toggleMotionEnabledState(enabled: Boolean) {
         binding.motionLayoutRepresentatives
-            .getTransition(R.id.hideForm)?.isEnabled = false
+            .getTransition(R.id.hideForm)?.isEnabled = enabled
     }
 
-    private fun getMotionController() = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-            val layoutManager =
-                (binding.recyclerviewRepresentatives.layoutManager as LinearLayoutManager)
+    private fun createSpinnerSelectionListener() = object : OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            val stateName = parent?.getItemAtPosition(position) as String
+            viewModel.state.value = stateName
+        }
 
-            val pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
+    }
 
-            synchronized(pastVisiblesItems) {
-                when {
-                    dy > 0 && pastVisiblesItems > 8 -> toggleMotionEnabledState(false)
+    private fun createMotionController(dy: Int) {
+        val layoutManager =
+            (binding.recyclerviewRepresentatives.layoutManager as LinearLayoutManager)
 
-                    dy < 0 && pastVisiblesItems <= 2 -> toggleMotionEnabledState(true)
+        val pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
 
-                    else -> {
-                    }
+        synchronized(pastVisiblesItems) {
+            Timber.e("LOG SCROLL pastVisiblesItems: $pastVisiblesItems, dy: $dy")
+            when {
+                dy > 0 && pastVisiblesItems > 8 -> toggleMotionEnabledState(false)
+
+                dy < 0 && pastVisiblesItems <= 2 -> toggleMotionEnabledState(true)
+
+                else -> {
                 }
             }
         }
