@@ -21,5 +21,7 @@
     <string name="go_to_the_facebook_profile">Go to the facebook profile</string>
     <string name="go_to_the_twitter_profile">Go to the Twitter profile</string>
     <string name="saved_elections">Saved Elections</string>
+    <string name="dummy_date">Tue Jun 02 00:00:00 EDT 2020</string>
+    <string name="dummy_election_name">Wisconsin Presidential Primary Election</string>
 
 </resources>

@@ -1,7 +1,10 @@
 package com.example.android.politicalpreparedness.extension
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -69,3 +72,9 @@ fun SettingsClient.verifyLocationSettings(
 }
 
 fun String?.orEmpty() = this ?: ""
+
+fun Fragment.startForUrl(url: String) = requireActivity().startForUrl(url)
+
+fun Activity.startForUrl(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+}

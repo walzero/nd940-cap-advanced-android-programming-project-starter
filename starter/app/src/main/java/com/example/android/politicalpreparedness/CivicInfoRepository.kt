@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.network.models.Division
+import com.example.android.politicalpreparedness.network.models.response.VoterInfoResponse
 import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +39,26 @@ class CivicInfoRepository(
             _representatives.postValue(response.toRepresentatives())
         } catch (e: Exception) {
             Timber.e(e)
+        }
+    }
+
+    suspend fun voterInformation(
+        division: Division,
+        electionId: Int?
+    ): VoterInfoResponse? {
+        val divisionStateValue = if (division.state.isBlank()) "ca" else division.state
+
+        val queryString = StringBuilder("country:${division.country}")
+            .append("/state:$divisionStateValue")
+
+        return try {
+            civicsApi.retrofitService.voterInfo(
+                address = queryString.toString(),
+                electionId = electionId?.toLong() ?: 0L
+            )
+        } catch (e: Exception) {
+            Timber.e(e)
+            null
         }
     }
 
