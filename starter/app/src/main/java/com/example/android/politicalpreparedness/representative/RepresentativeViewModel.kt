@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class RepresentativeViewModel(
     private val _repository: CivicInfoRepository
-) : ViewModel() {
+) : ViewModel(), AddressBindableFields {
 
     private val _showSnackBar = MutableLiveData<@StringRes Int>()
     val showSnackBar: LiveData<Int>
@@ -22,6 +22,11 @@ class RepresentativeViewModel(
     val representatives: LiveData<List<Representative>>
         get() = _repository.representatives()
 
+    override val addressLine1 = MutableLiveData<String>()
+    override val addressLine2 = MutableLiveData<String>()
+    override val city = MutableLiveData<String>()
+    override val zipcode = MutableLiveData<String>()
+
     fun updateRepresentatives(address: Address) = viewModelScope.launch {
         _repository.refreshRepresentatives(address)
     }
@@ -29,22 +34,18 @@ class RepresentativeViewModel(
     fun onGpsDisabled() =
         _showSnackBar.postValue(R.string.gps_required)
 
-    /**
-     *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
-
-    val (offices, officials) = getRepresentativesDeferred.await()
-    _representatives.value = offices.flatMap { office -> office.getRepresentatives(officials) }
-
-    Note: getRepresentatives in the above code represents the method used to fetch data from the API
-    Note: _representatives in the above code represents the established mutable live data housing representatives
-
-     */
-
     //TODO: Create function get address from geo location
     fun fetchRepresentativesFromCurrentLocation() {
 
     }
 
     //TODO: Create function to get address from individual fields
+    private fun joinFieldsToAddress(): Address = Address(
+        line1 = addressLine1.value.orEmpty(),
+        line2 = addressLine2.value.orEmpty(),
+        city = city.value.orEmpty(),
+        state = "",
+        zip = zipcode.value.orEmpty()
+    )
 
 }

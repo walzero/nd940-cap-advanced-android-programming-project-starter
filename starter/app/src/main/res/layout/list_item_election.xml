@@ -27,7 +27,7 @@
             android:fontFamily="@font/kanit"
             android:text="@{election.name}"
             android:textColor="@color/charcoal_gray"
-            android:textSize="16sp"
+            android:textSize="@dimen/list_item_text_large"
             app:layout_constraintBottom_toTopOf="@+id/text_election_date"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

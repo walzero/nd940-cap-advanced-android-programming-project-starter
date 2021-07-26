@@ -11,7 +11,7 @@
 
     <!-- TODO: Add necessary styles -->
     <style name="AppTheme.DefaultTitleText">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/dark_charcoal</item>
         <item name="android:padding">@dimen/default_padding</item>
     </style>
@@ -20,5 +20,11 @@
         <item name="android:textColor">@color/dark_charcoal</item>
         <item name="android:textColorHint">@color/gray_50</item>
         <item name="android:maxLength">80</item>
+    </style>
+
+    <style name="AppTheme.DefaultSpinner">
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:textColor">@color/dark_charcoal</item>
+        <item name="android:textSize">@dimen/spinner_text_size</item>
     </style>
 </resources>

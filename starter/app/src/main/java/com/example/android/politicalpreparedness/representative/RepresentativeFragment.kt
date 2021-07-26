@@ -15,6 +15,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.extension.isAllowed
@@ -34,10 +36,6 @@ import java.util.*
 
 
 class DetailFragment : Fragment() {
-
-    companion object {
-        //TODO: Add Constant for Location request
-    }
 
     private lateinit var binding: FragmentRepresentativeBinding
 
@@ -89,16 +87,9 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //TODO: Establish bindings
         binding = FragmentRepresentativeBinding.inflate(layoutInflater)
         binding.representativesAdapter = adapter
         binding.lifecycleOwner = this
-
-        //TODO: Define and assign Representative adapter
-
-        //TODO: Populate Representative adapter
-
-        //TODO: Establish button listeners for field and location search
         return binding.root
     }
 
@@ -122,6 +113,7 @@ class DetailFragment : Fragment() {
 
     private fun setListeners() = with(binding) {
         buttonLocation.setOnClickListener { onSearchRepresentativeByLocation() }
+        binding.recyclerviewRepresentatives.addOnScrollListener(getMotionController())
     }
 
     private fun onSearchRepresentativeByLocation() {
@@ -195,5 +187,31 @@ class DetailFragment : Fragment() {
     private fun hideKeyboard() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    private fun toggleMotionEnabledState(enabled: Boolean) {
+        binding.motionLayoutRepresentatives
+            .getTransition(R.id.hideForm)?.isEnabled = false
+    }
+
+    private fun getMotionController() = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val layoutManager =
+                (binding.recyclerviewRepresentatives.layoutManager as LinearLayoutManager)
+
+            val pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
+
+            synchronized(pastVisiblesItems) {
+                when {
+                    dy > 0 && pastVisiblesItems > 8 -> toggleMotionEnabledState(false)
+
+                    dy < 0 && pastVisiblesItems <= 2 -> toggleMotionEnabledState(true)
+
+                    else -> {
+                    }
+                }
+            }
+        }
     }
 }

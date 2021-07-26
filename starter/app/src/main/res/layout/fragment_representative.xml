@@ -6,12 +6,16 @@
     <data>
 
         <variable
+            name="addressFields"
+            type="com.example.android.politicalpreparedness.representative.AddressBindableFields" />
+
+        <variable
             name="representativesAdapter"
             type="com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter" />
     </data>
 
-    <!-- TODO: Add motion scene to hide form on vertical scroll. -->
     <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motionLayoutRepresentatives"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/fragment_representative_scene">
@@ -51,6 +55,7 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:hint="@string/address_line_1"
                 android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:text="@={addressFields.addressLine1}"
                 android:theme="@style/AppTheme.DefaultEditText"
                 app:layout_constraintBottom_toTopOf="@+id/address_line_2"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +71,7 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:hint="@string/address_line_2"
                 android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:text="@={addressFields.addressLine2}"
                 android:theme="@style/AppTheme.DefaultEditText"
                 app:layout_constraintBottom_toTopOf="@+id/city"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +87,7 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:hint="@string/city"
                 android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:text="@={addressFields.city}"
                 android:theme="@style/AppTheme.DefaultEditText"
                 app:layout_constraintBottom_toTopOf="@+id/zipCode"
                 app:layout_constraintEnd_toStartOf="@+id/state"
@@ -92,7 +99,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:entries="@array/states"
                 android:inputType="textPostalAddress"
+                android:theme="@style/AppTheme.DefaultSpinner"
                 app:layout_constraintBottom_toBottomOf="@id/city"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/city"
@@ -107,6 +116,7 @@
                 android:hint="@string/zip_code"
                 android:inputType="number"
                 android:maxLength="5"
+                android:text="@={addressFields.zipcode}"
                 android:theme="@style/AppTheme.DefaultEditText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/city"
@@ -163,11 +173,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_representatives"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@color/white"
+            android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/list_padding_large"
             app:adapter="@{representativesAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/representative_title"
