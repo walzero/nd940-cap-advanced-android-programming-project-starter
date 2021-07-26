@@ -16,134 +16,134 @@
         android:layout_height="match_parent"
         app:layoutDescription="@xml/fragment_representative_scene">
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/searchBlock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="search_title, address_line_1, address_line_2, city, state, button_search, button_location"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- TODO: Add visual styling and content -->
-        <TextView
-            android:id="@+id/search_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSearchGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:fontFamily="@font/kanit_bold"
-            android:text="@string/representative_search"
-            android:theme="@style/AppTheme.DefaultTitleText"
-            app:layout_constraintBottom_toTopOf="@+id/address_line_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- TODO: Add data binding value -->
-        <!-- TODO: Add visual styling and content -->
-        <EditText
-            android:id="@+id/address_line_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:hint="@string/address_line_1"
-            android:inputType="textPostalAddress|textAutoComplete|textCapWords"
-            android:theme="@style/AppTheme.DefaultEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_title" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-        <!-- TODO: Add data binding value -->
-        <!-- TODO: Add visual styling and content -->
-        <EditText
-            android:id="@+id/address_line_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:hint="@string/address_line_2"
-            android:inputType="textPostalAddress|textAutoComplete|textCapWords"
-            android:theme="@style/AppTheme.DefaultEditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address_line_1" />
+            <TextView
+                android:id="@+id/search_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:fontFamily="@font/kanit_bold"
+                android:text="@string/representative_search"
+                android:theme="@style/AppTheme.DefaultTitleText"
+                app:layout_constraintBottom_toTopOf="@+id/address_line_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <!-- TODO: Add data binding value -->
-        <!-- TODO: Add visual styling and content -->
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:hint="@string/city"
-            android:inputType="textPostalAddress|textAutoComplete|textCapWords"
-            android:theme="@style/AppTheme.DefaultEditText"
-            app:layout_constraintEnd_toStartOf="@+id/state"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_line_2" />
+            <EditText
+                android:id="@+id/address_line_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:hint="@string/address_line_1"
+                android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:theme="@style/AppTheme.DefaultEditText"
+                app:layout_constraintBottom_toTopOf="@+id/address_line_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_title" />
 
-        <!-- TODO: Add default values from provided resources  -->
-        <!-- TODO: Add data binding value -->
-        <!-- TODO: Add visual styling and content -->
-        <Spinner
-            android:id="@+id/state"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:inputType="textPostalAddress"
-            app:layout_constraintBottom_toBottomOf="@id/city"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/city"
-            app:layout_constraintTop_toTopOf="@id/city" />
+            <EditText
+                android:id="@+id/address_line_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:hint="@string/address_line_2"
+                android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:theme="@style/AppTheme.DefaultEditText"
+                app:layout_constraintBottom_toTopOf="@+id/city"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_line_1" />
 
-        <EditText
-            android:id="@+id/zipCode"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginTop="@dimen/default_margin"
-            android:hint="@string/zip_code"
-            android:inputType="number"
-            android:maxLength="5"
-            android:theme="@style/AppTheme.DefaultEditText"
-            app:layout_constraintEnd_toEndOf="@id/city"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/city" />
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:hint="@string/city"
+                android:inputType="textPostalAddress|textAutoComplete|textCapWords"
+                android:theme="@style/AppTheme.DefaultEditText"
+                app:layout_constraintBottom_toTopOf="@+id/zipCode"
+                app:layout_constraintEnd_toStartOf="@+id/state"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address_line_2" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:backgroundTint="@color/colorPrimary"
-            android:fontFamily="@font/kanit"
-            android:text="@string/find_representatives"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/zipCode" />
+            <Spinner
+                android:id="@+id/state"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:inputType="textPostalAddress"
+                app:layout_constraintBottom_toBottomOf="@id/city"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/city"
+                app:layout_constraintTop_toTopOf="@id/city" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:backgroundTint="@color/colorPrimary"
-            android:fontFamily="@font/kanit"
-            android:text="@string/use_my_location"
-            android:textColor="@color/white"
-            app:icon="@drawable/ic_baseline_my_location_24"
-            app:iconGravity="textStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_search" />
+            <EditText
+                android:id="@+id/zipCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:hint="@string/zip_code"
+                android:inputType="number"
+                android:maxLength="5"
+                android:theme="@style/AppTheme.DefaultEditText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="0dp"
+                android:fontFamily="@font/kanit"
+                android:text="@string/find_representatives"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/zipCode" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:backgroundTint="@color/colorPrimary"
+                android:elevation="0dp"
+                android:fontFamily="@font/kanit"
+                android:text="@string/use_my_location"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_baseline_my_location_24"
+                app:iconGravity="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_search" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/representative_title"
@@ -151,27 +151,27 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
+            android:background="@color/white"
             android:fontFamily="@font/kanit_bold"
             android:text="@string/my_representatives"
             android:theme="@style/AppTheme.DefaultTitleText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_location" />
+            app:layout_constraintTop_toBottomOf="@+id/clSearchGroup"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_representatives"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical"
             app:adapter="@{representativesAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/representative_title"
-            app:layout_constraintVertical_bias="0.0"
-            tools:itemCount="3"
+            tools:itemCount="10"
             tools:listitem="@layout/list_item_representative" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>

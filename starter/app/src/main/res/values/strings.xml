@@ -6,6 +6,7 @@
     <string name="find_representatives">Find My Representatives</string>
 
     <string name="location_required">Location permission is required to use this feature!</string>
+    <string name="location_error">Error finding the current location</string>
     <string name="gps_required">Gps is required to use this feature, please enable it and try again!</string>
 
     <string name="ok">OK</string>

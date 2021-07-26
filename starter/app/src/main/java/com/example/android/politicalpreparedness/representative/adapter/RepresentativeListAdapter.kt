@@ -54,7 +54,7 @@ class RepresentativeViewHolder(val binding: ListItemRepresentativeBinding) :
     }
 
     private fun showWWWLinks(urls: List<String>) {
-        enableLink(binding.imageWww, urls.first())
+        if (urls.isNotEmpty()) enableLink(binding.imageWww, urls.first())
     }
 
     private fun getFacebookUrl(channels: List<Channel>): String? {

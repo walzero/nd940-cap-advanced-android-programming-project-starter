@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.network
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 
 class CivicsHttpClient : OkHttpClient() {
 
@@ -10,10 +11,11 @@ class CivicsHttpClient : OkHttpClient() {
 
         fun getClient(): OkHttpClient {
             return Builder()
+                .addInterceptor(interceptor)
                 .addInterceptor { chain ->
                     val original = chain.request()
                     val url = original
-                        .url()
+                        .url
                         .newBuilder()
                         .addQueryParameter("key", API_KEY)
                         .build()
