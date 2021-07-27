@@ -52,8 +52,6 @@ class ElectionsFragment : Fragment() {
         }
     }
 
-    //TODO: Refresh adapters when fragment loads
-
     private fun goToVoterInfo(it: Election) = navigateTo(
         ElectionsFragmentDirections.fromElectionsToVoterInfo(it.id, it.division)
     )

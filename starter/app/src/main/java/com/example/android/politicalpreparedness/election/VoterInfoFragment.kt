@@ -30,10 +30,6 @@ class VoterInfoFragment : Fragment() {
         binding.voterInfo = viewModel
         binding.lifecycleOwner = this
 
-        //TODO: Handle loading of URLs
-
-        //TODO: Handle save button UI state
-        //TODO: cont'd Handle save button clicks
         return binding.root
     }
 
