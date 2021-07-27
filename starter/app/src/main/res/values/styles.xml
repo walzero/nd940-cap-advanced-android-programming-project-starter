@@ -9,10 +9,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- TODO: Add necessary styles -->
     <style name="AppTheme.DefaultTitleText">
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/dark_charcoal</item>
+        <item name="android:padding">@dimen/default_padding</item>
+    </style>
+
+    <style name="AppTheme.DefaultSubTitleText">
+        <item name="fontFamily">@font/kanit</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textColor">@color/gray</item>
         <item name="android:padding">@dimen/default_padding</item>
     </style>
 

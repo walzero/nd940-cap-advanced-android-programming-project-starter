@@ -6,12 +6,13 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.android.politicalpreparedness.network.models.Election
 
 @Dao
 interface ElectionDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(vararg election: Election)
 
     @Query("SELECT * FROM election_table ORDER BY electionDay DESC")
@@ -21,7 +22,10 @@ interface ElectionDao {
     fun getFollowedElections(): LiveData<List<Election>>
 
     @Query("SELECT * FROM election_table WHERE id = :id")
-    fun getElectionById(id: Int): LiveData<List<Election>>
+    fun getElectionById(id: Int): LiveData<Election>
+
+    @Update
+    fun updateItems(vararg election: Election)
 
     @Delete
     suspend fun deleteElections(vararg election: Election): Int

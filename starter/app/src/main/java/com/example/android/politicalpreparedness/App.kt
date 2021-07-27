@@ -5,6 +5,7 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.election.VoterInfoViewModel
 import com.example.android.politicalpreparedness.network.CivicsApi
+import com.example.android.politicalpreparedness.network.models.Division
 import com.example.android.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -21,10 +22,12 @@ class App : Application() {
         module {
             single { ElectionDatabase.getInstance(get()) }
             single { CivicsApi }
-            single { CivicInfoRepository(get(), get()) }
+            factory { CivicInfoRepository(get(), get()) }
             factory { RepresentativeViewModel(get()) }
             factory { ElectionsViewModel(get()) }
-            factory { VoterInfoViewModel(get()) }
+            factory { (electionId: Int, division: Division) ->
+                VoterInfoViewModel(get(), electionId, division)
+            }
         }
     }
 

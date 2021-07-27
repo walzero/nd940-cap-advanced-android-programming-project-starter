@@ -226,7 +226,6 @@ class DetailFragment : Fragment() {
         val pastVisiblesItems = layoutManager.findFirstCompletelyVisibleItemPosition()
 
         synchronized(pastVisiblesItems) {
-            Timber.e("LOG SCROLL pastVisiblesItems: $pastVisiblesItems, dy: $dy")
             when {
                 dy > 0 && pastVisiblesItems > 8 -> toggleMotionEnabledState(false)
 

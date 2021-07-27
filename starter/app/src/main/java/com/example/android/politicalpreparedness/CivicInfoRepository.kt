@@ -6,6 +6,7 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.Address
 import com.example.android.politicalpreparedness.network.models.Division
+import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.network.models.response.VoterInfoResponse
 import com.example.android.politicalpreparedness.representative.model.Representative
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,6 +20,8 @@ class CivicInfoRepository(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
     private val _representatives = MutableLiveData<List<Representative>>()
+
+    val voterInfoResponse = MutableLiveData<VoterInfoResponse>()
 
     suspend fun refreshUpcomingElections() {
         withContext(ioDispatcher) {
@@ -42,27 +45,48 @@ class CivicInfoRepository(
         }
     }
 
-    suspend fun voterInformation(
-        division: Division,
-        electionId: Int?
-    ): VoterInfoResponse? {
+    suspend fun updateVoterInformation(division: Division, electionId: Int?) {
         val divisionStateValue = if (division.state.isBlank()) "ca" else division.state
 
         val queryString = StringBuilder("country:${division.country}")
             .append("/state:$divisionStateValue")
 
-        return try {
+        try {
             civicsApi.retrofitService.voterInfo(
                 address = queryString.toString(),
                 electionId = electionId?.toLong() ?: 0L
-            )
+            ).let { voterInfo -> voterInfoResponse.postValue(voterInfo) }
         } catch (e: Exception) {
             Timber.e(e)
-            null
+        }
+    }
+
+    fun getElectionById(id: Int) = try {
+        electionDatabase.electionDao.getElectionById(id)
+    } catch (e: Exception) {
+        Timber.e(e)
+        null
+    }
+
+    suspend fun followElections(vararg election: Election) {
+        updateElection(*election.onEach { it.followed = true })
+    }
+
+    suspend fun unfollowElections(vararg election: Election) {
+        updateElection(*election.onEach { it.followed = false })
+    }
+
+    suspend fun updateElection(vararg election: Election) = withContext(Dispatchers.IO) {
+        try {
+            electionDatabase.electionDao.updateItems(*election)
+        } catch (e: Exception) {
+            Timber.e(e)
         }
     }
 
     fun upcomingElections() = electionDatabase.electionDao.getElections()
+
+    fun followedElections() = electionDatabase.electionDao.getFollowedElections()
 
     fun representatives(): LiveData<List<Representative>> = _representatives
 }

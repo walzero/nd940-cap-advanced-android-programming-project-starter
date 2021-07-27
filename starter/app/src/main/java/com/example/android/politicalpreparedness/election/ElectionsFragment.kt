@@ -16,7 +16,7 @@ class ElectionsFragment : Fragment() {
     private lateinit var binding: FragmentElectionBinding
 
     private val electionsAdapter by lazy { ElectionListAdapter { goToVoterInfo(it) } }
-    private val savedElectionsAdapter by lazy { ElectionListAdapter { goToVoterInfo(it) } }
+    private val followedElectionsAdapter by lazy { ElectionListAdapter { goToVoterInfo(it) } }
 
     private val viewModel: ElectionsViewModel by viewModel()
 
@@ -29,7 +29,7 @@ class ElectionsFragment : Fragment() {
         binding = FragmentElectionBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.electionsAdapter = electionsAdapter
-        binding.savedElectionsAdapter = savedElectionsAdapter
+        binding.followedElectionsAdapter = followedElectionsAdapter
 
         return binding.root
     }
@@ -40,9 +40,14 @@ class ElectionsFragment : Fragment() {
     }
 
     private fun addObservers() = with(viewModel) {
-        upcomingElection.observe(viewLifecycleOwner) { elections ->
+        upcomingElections.observe(viewLifecycleOwner) { elections ->
             elections?.let {
                 (binding.upcomingElectionsList.adapter as ElectionListAdapter).submitList(it)
+            }
+        }
+        followedElections.observe(viewLifecycleOwner) { followedElections ->
+            followedElections?.let {
+                (binding.followedElectionsList.adapter as ElectionListAdapter).submitList(it)
             }
         }
     }

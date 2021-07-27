@@ -4,6 +4,8 @@
 
     <string name="upcoming_elections">Upcoming Elections</string>
     <string name="find_representatives">Find My Representatives</string>
+    <string name="follow_election">Follow Election</string>
+    <string name="unfollow_election">Unfollow Election</string>
 
     <string name="location_required">Location permission is required to use this feature!</string>
     <string name="location_error">Error finding the current location</string>
@@ -23,5 +25,8 @@
     <string name="saved_elections">Saved Elections</string>
     <string name="dummy_date">Tue Jun 02 00:00:00 EDT 2020</string>
     <string name="dummy_election_name">Wisconsin Presidential Primary Election</string>
+    <string name="ballot_information">Ballot Information</string>
+    <string name="voting_locations">Voting Locations</string>
+    <string name="election_information">Election Information</string>
 
 </resources>

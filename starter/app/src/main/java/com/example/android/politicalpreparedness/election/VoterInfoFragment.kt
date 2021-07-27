@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import com.example.android.politicalpreparedness.extension.startForUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class VoterInfoFragment : Fragment() {
 
@@ -15,7 +17,9 @@ class VoterInfoFragment : Fragment() {
 
     private val args: VoterInfoFragmentArgs by navArgs()
 
-    private val viewModel: VoterInfoViewModel by viewModel()
+    private val viewModel: VoterInfoViewModel by viewModel {
+        parametersOf(args.argElectionId, args.argDivision)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,16 +30,6 @@ class VoterInfoFragment : Fragment() {
         binding.voterInfo = viewModel
         binding.lifecycleOwner = this
 
-        //TODO: Add ViewModel values and create ViewModel
-
-        //TODO: Add binding values
-
-        //TODO: Populate voter info -- hide views without provided data.
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-         */
-
-
         //TODO: Handle loading of URLs
 
         //TODO: Handle save button UI state
@@ -45,7 +39,14 @@ class VoterInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchVoterInfo(args.argElectionId, args.argDivision)
+        setObservers()
+    }
+
+    private fun setObservers() = with(viewModel) {
+        navigateToUrl.observe(viewLifecycleOwner) { url -> url?.let { startForUrl(it) } }
+        election?.observe(viewLifecycleOwner) { election ->
+            election?.let { binding.buttonFollow.setText(getFollowButtonText(it)) }
+        }
     }
 
 }

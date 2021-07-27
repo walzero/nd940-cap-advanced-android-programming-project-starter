@@ -16,7 +16,7 @@
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/border_only_button_shape"
         android:clickable="true"
         android:focusable="true">
 

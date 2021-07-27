@@ -16,14 +16,12 @@ class ElectionsViewModel(
         refreshElections()
     }
 
-    val upcomingElection: LiveData<List<Election>>
+    val upcomingElections: LiveData<List<Election>>
         get() = civicInfoRepository.upcomingElections()
 
-    //TODO: Create live data val for saved elections
+    val followedElections: LiveData<List<Election>>
+        get() = civicInfoRepository.followedElections()
 
-    //TODO: Create val and functions to populate live data for upcoming elections from the API and saved elections from local database
-
-    //TODO: Create functions to navigate to saved or upcoming election voter info
 
     private fun refreshElections() = viewModelScope.launch {
         civicInfoRepository.refreshUpcomingElections()
